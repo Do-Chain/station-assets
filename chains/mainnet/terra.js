@@ -1,6 +1,6 @@
 module.exports = {
   chainID: 'columbus-5',
-  lcd: 'https://lcd.terraclassic.community',
+  lcd: 'https://terra-classic-lcd.publicnode.com',
   api: 'https://api.terraclassic.community',
   hive: 'https://hive.terraclassic.community/graphql',
   gasAdjustment: 5,
