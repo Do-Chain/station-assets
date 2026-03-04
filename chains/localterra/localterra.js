@@ -1,7 +1,14 @@
 module.exports = {
-  chainID: 'localterra',
-  lcd: 'http://localhost:1317',
+  chainID: "localterra",
+
+  name: "LocalTerra",
+
+  lcd: "http://localhost:1317",
+  api: "http://localhost:1317",
+  rpc: "http://localhost:26657",
+
   gasAdjustment: 5,
+
   gasPrices: {
     uluna: 28.325,
     usdr: 0.52469,
@@ -27,31 +34,34 @@ module.exports = {
     umyr: 3.0,
     utwd: 20.0,
   },
-  prefix: 'terra',
-  coinType: '330',
-  baseAsset: 'uluna',
-  name: 'LocalTerra',
-  icon: process.env.CF_PAGES_URL + '/img/coins/TerraAUDClassic.svg',
+
+  prefix: "terra",
+  coinType: "330",
+  baseAsset: "uluna",
+
+  icon: process.env.CF_PAGES_URL + "/img/coins/TerraAUDClassic.svg",
+
   explorer: {
-    address: 'https://finder.terraclassic.community/localterra/address/{}',
-    tx: 'https://finder.terraclassic.community/localterra/tx/{}',
-    validator: 'https://finder.terraclassic.community/localterra/validator/{}',
-    block: 'https://finder.terraclassic.community/localterra/block/{}',
+    address: "https://finder.terraclassic.community/localterra/address/{}",
+    tx: "https://finder.terraclassic.community/localterra/tx/{}",
+    validator: "https://finder.terraclassic.community/localterra/validator/{}",
+    block: "https://finder.terraclassic.community/localterra/block/{}",
   },
+
   tokens: [
     {
-      token: 'uluna',
-      symbol: 'LUNC',
-      name: 'Luna Classic',
-      icon: process.env.CF_PAGES_URL + '/img/coins/LunaClassic.svg',
+      token: "uluna",
+      symbol: "LUNC",
+      name: "Luna Classic",
+      icon: process.env.CF_PAGES_URL + "/img/coins/LunaClassic.svg",
       decimals: 6,
     },
     {
-      token: 'uusd',
-      symbol: 'USTC',
-      name: 'TerraUSD Classic',
-      icon: process.env.CF_PAGES_URL + '/img/coins/TerraUSDClassic.svg',
+      token: "uusd",
+      symbol: "USTC",
+      name: "TerraUSD Classic",
+      icon: process.env.CF_PAGES_URL + "/img/coins/TerraUSDClassic.svg",
       decimals: 6,
     },
   ],
-}
+};
