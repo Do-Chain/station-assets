@@ -1,47 +1,41 @@
-const express = require('express');
-const cors = require('cors');
-const fs = require("fs");
+const express = require("express");
+const cors = require("cors");
 const path = require("path");
+const { execSync } = require("child_process");
 
 const app = express();
-const publicDir = path.join(__dirname, "public");
-
 app.use(cors());
 
-// Serve static JSON files
-app.use(express.static('public'));
+const buildDir = path.join(__dirname, "build");
 
-// Recursive function to find JSON files
-function findJsonFiles(directory, fileList = []) {
-    const files = fs.readdirSync(directory);
-  
-    files.forEach((file) => {
-      const filePath = path.join(directory, file);
-      const stat = fs.statSync(filePath);
-  
-      if (stat.isDirectory()) {
-        findJsonFiles(filePath, fileList);
-      } else if (path.extname(file) === '.json') {
-        fileList.push(filePath);
-      }
-    });
-  
-    return fileList;
-  }
-  
-  // Endpoint to display links to JSON files
-  app.get('/', (req, res) => {
-    const jsonFiles = findJsonFiles(publicDir);
-  
-    const links = jsonFiles.map((file) => {
-      const relativePath = path.relative(publicDir, file);
-      return `<a href="/${relativePath}">${relativePath}</a>`;
-    });
-  
-    res.send(links.join('<br>'));
-  });
+// Build assets on startup (so build/chains.json always exists)
+try {
+  execSync("node index.js", { stdio: "inherit" });
+} catch (e) {
+  console.error("Failed to build assets (node index.js).");
+  process.exit(1);
+}
 
-// Start the server
-app.listen(3001, () => {
-  console.log('Server is running');
+// Serve generated files (chains.json, denoms.json, img/, etc.)
+app.use(express.static(buildDir));
+
+// Nice homepage
+app.get("/", (req, res) => {
+  res.send(
+    [
+      `<h3>station-assets local server</h3>`,
+      `<ul>`,
+      `<li><a href="/chains.json">/chains.json</a></li>`,
+      `<li><a href="/denoms.json">/denoms.json</a></li>`,
+      `<li><a href="/ibc.json">/ibc.json</a></li>`,
+      `<li><a href="/ibc_tokens.json">/ibc_tokens.json</a></li>`,
+      `<li><a href="/currencies.json">/currencies.json</a></li>`,
+      `</ul>`,
+    ].join("")
+  );
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`station-assets server running on http://localhost:${PORT}`);
 });
