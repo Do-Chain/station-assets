@@ -1,23 +1,34 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const { execSync } = require("child_process");
+const express = require("express")
+const cors = require("cors")
+const path = require("path")
+const { execSync } = require("child_process")
 
-const app = express();
-app.use(cors());
+// import price recovery handlers
+const {
+  priceRecoveryHandler,
+  fiatRecoveryHandler,
+} = require("./prices/pricerecovery")
 
-const buildDir = path.join(__dirname, "build");
+const app = express()
+app.use(cors())
+app.use(express.json())
+
+const buildDir = path.join(__dirname, "build")
 
 // Build assets on startup (so build/chains.json always exists)
 try {
-  execSync("node index.js", { stdio: "inherit" });
+  execSync("node index.js", { stdio: "inherit" })
 } catch (e) {
-  console.error("Failed to build assets (node index.js).");
-  process.exit(1);
+  console.error("Failed to build assets (node index.js).")
+  process.exit(1)
 }
 
 // Serve generated files (chains.json, denoms.json, img/, etc.)
-app.use(express.static(buildDir));
+app.use(express.static(buildDir))
+
+// API routes for price recovery
+app.get("/api/prices", priceRecoveryHandler)
+app.get("/api/fiat", fiatRecoveryHandler)
 
 // Nice homepage
 app.get("/", (req, res) => {
@@ -30,12 +41,15 @@ app.get("/", (req, res) => {
       `<li><a href="/ibc.json">/ibc.json</a></li>`,
       `<li><a href="/ibc_tokens.json">/ibc_tokens.json</a></li>`,
       `<li><a href="/currencies.json">/currencies.json</a></li>`,
+      `<li><a href="/api/prices">/api/prices</a></li>`,
+      `<li><a href="/api/fiat">/api/fiat</a></li>`,
       `</ul>`,
     ].join("")
-  );
-});
+  )
+})
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
+
 app.listen(PORT, () => {
-  console.log(`station-assets server running on http://localhost:${PORT}`);
-});
+  console.log(`station-assets server running on http://localhost:${PORT}`)
+})
