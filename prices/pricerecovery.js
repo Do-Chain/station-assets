@@ -5,7 +5,65 @@ const CMC_SYMBOLS = {
   uluna: "LUNC",
   "uluna:classic": "LUNC",
   uluna_classic: "LUNC",
+  lunc: "LUNC",
+
+  "uluna:phoenix": "LUNA",
+  luna2: "LUNA",
+  luna: "LUNA",
+
   uusd: "USTC",
+  ustc: "USTC",
+
+  uatom: "ATOM",
+  atom: "ATOM",
+
+  uosmo: "OSMO",
+  osmo: "OSMO",
+
+  ujuno: "JUNO",
+  juno: "JUNO",
+
+  usei: "SEI",
+  sei: "SEI",
+
+  uinj: "INJ",
+  inj: "INJ",
+
+  uakt: "AKT",
+  akt: "AKT",
+
+  uscrt: "SCRT",
+  scrt: "SCRT",
+
+  ukuji: "KUJI",
+  kuji: "KUJI",
+
+  ustars: "STARS",
+  stars: "STARS",
+
+  udydx: "DYDX",
+  dydx: "DYDX",
+
+  untrn: "NTRN",
+  ntrn: "NTRN",
+
+  uwhale: "WHALE",
+  whale: "WHALE",
+
+  urun: "RUN",
+  run: "RUN",
+
+  uusdc: "USDC",
+  usdc: "USDC",
+
+  uusdt: "USDT",
+  usdt: "USDT",
+
+  weth: "ETH",
+  eth: "ETH",
+
+  wbtc: "BTC",
+  btc: "BTC",
 }
 
 async function fetchCoinMarketCapPrices() {
@@ -60,7 +118,14 @@ async function fetchFiatRates() {
     .filter((id) => id && id !== "USD")
 
   if (!apiKey) {
-    return { USD: 1 }
+    return {
+      USD: {
+        rate: 1,
+        name: "United States Dollar",
+        symbol: "$",
+        source: "fallback",
+      },
+    }
   }
 
   try {
@@ -74,7 +139,7 @@ async function fetchFiatRates() {
     })
 
     const quotes = data?.quotes || {}
-    const result = { USD: 1 }
+    const result = {}
 
     currencies.forEach(({ id, name, symbol }) => {
       if (id === "USD") {
@@ -94,6 +159,15 @@ async function fetchFiatRates() {
         source: "apilayer",
       }
     })
+
+    if (!result.USD) {
+      result.USD = {
+        rate: 1,
+        name: "United States Dollar",
+        symbol: "$",
+        source: "apilayer",
+      }
+    }
 
     return result
   } catch (error) {

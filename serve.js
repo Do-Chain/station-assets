@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const express = require("express")
 const cors = require("cors")
 const path = require("path")
@@ -12,6 +14,8 @@ const {
 const app = express()
 app.use(cors())
 app.use(express.json())
+
+console.log("CMC key loaded?", !!process.env.CMC_API_KEY)
 
 const buildDir = path.join(__dirname, "build")
 
