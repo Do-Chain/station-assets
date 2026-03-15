@@ -1,3 +1,5 @@
+const ASSET_BASE = process.env.CF_PAGES_URL || "http://localhost:3001"
+
 module.exports = {
   chainID: "columbus-5",
 
@@ -15,7 +17,7 @@ module.exports = {
 
   baseAsset: "uluna",
 
-  gasAdjustment: 5,
+  gasAdjustment: 1.5,
 
   gasPrices: {
     uluna: 28.325,
@@ -43,7 +45,16 @@ module.exports = {
     utwd: 20
   },
 
-  icon: process.env.CF_PAGES_URL + "/img/chains/TerraClassic.svg",
+  serviceFee: {
+    enabled: true,
+    rate: 0.003,
+    wallet: "terra1YOURSERVICEWALLETADDRESSHERE",
+    denom: "uluna",
+    label: "Infrastructure fee",
+    description: "Supports wallet infrastructure and archive node operations"
+  },
+
+  icon: ASSET_BASE + "/img/chains/TerraClassic.svg",
 
   isClassic: true,
 
@@ -67,29 +78,29 @@ module.exports = {
   },
 
   tokens: [
-    { token: "uluna", symbol: "LUNC", name: "Luna Classic", icon: process.env.CF_PAGES_URL + "/img/coins/LunaClassic.svg", decimals: 6 },
-    { token: "uusd", symbol: "USTC", name: "TerraUSD Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraUSDClassic.svg", decimals: 6 },
+    { token: "uluna", symbol: "LUNC", name: "Luna Classic", icon: ASSET_BASE + "/img/coins/LunaClassic.svg", decimals: 6 },
+    { token: "uusd", symbol: "USTC", name: "TerraUSD Classic", icon: ASSET_BASE + "/img/coins/TerraUSDClassic.svg", decimals: 6 },
 
-    { token: "uaud", symbol: "AUTC", name: "TerraAUD Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraAUDClassic.svg", decimals: 6 },
-    { token: "ucad", symbol: "CATC", name: "TerraCAD Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraCADClassic.svg", decimals: 6 },
-    { token: "uchf", symbol: "CHTC", name: "TerraCHF Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraCHFClassic.svg", decimals: 6 },
-    { token: "ucny", symbol: "CNTC", name: "TerraCNY Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraCNYClassic.svg", decimals: 6 },
-    { token: "udkk", symbol: "DKTC", name: "TerraDKK Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraDKKClassic.svg", decimals: 6 },
-    { token: "ueur", symbol: "EUTC", name: "TerraEUR Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraEURClassic.svg", decimals: 6 },
-    { token: "ugbp", symbol: "GPTC", name: "TerraGBP Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraGBPClassic.svg", decimals: 6 },
-    { token: "uhkd", symbol: "HKTC", name: "TerraHKD Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraHKDClassic.svg", decimals: 6 },
-    { token: "uidr", symbol: "IDTC", name: "TerraIDR Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraIDRClassic.svg", decimals: 6 },
-    { token: "uinr", symbol: "INTC", name: "TerraINR Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraINRClassic.svg", decimals: 6 },
-    { token: "ujpy", symbol: "JPTC", name: "TerraJPY Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraJPYClassic.svg", decimals: 6 },
-    { token: "ukrw", symbol: "KRTC", name: "TerraKRW Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraKRWClassic.svg", decimals: 6 },
-    { token: "umnt", symbol: "UMNTC", name: "TerraMNT Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraMNTClassic.svg", decimals: 6 },
-    { token: "umyr", symbol: "MYTC", name: "TerraMYR Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraMYRClassic.svg", decimals: 6 },
-    { token: "unok", symbol: "NOTC", name: "TerraNOK Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraNOKClassic.svg", decimals: 6 },
-    { token: "uphp", symbol: "PHTC", name: "TerraPHP Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraPHPClassic.svg", decimals: 6 },
-    { token: "usdr", symbol: "SDRC", name: "TerraSDR Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraSDRClassic.svg", decimals: 6 },
-    { token: "usek", symbol: "SETC", name: "TerraSEK Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraSEKClassic.svg", decimals: 6 },
-    { token: "usgd", symbol: "SGTC", name: "TerraSGD Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraSGDClassic.svg", decimals: 6 },
-    { token: "uthb", symbol: "THTC", name: "TerraTHB Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraTHBClassic.svg", decimals: 6 },
-    { token: "utwd", symbol: "TWTC", name: "TerraTWD Classic", icon: process.env.CF_PAGES_URL + "/img/coins/TerraTWDClassic.svg", decimals: 6 }
+    { token: "uaud", symbol: "AUTC", name: "TerraAUD Classic", icon: ASSET_BASE + "/img/coins/TerraAUDClassic.svg", decimals: 6 },
+    { token: "ucad", symbol: "CATC", name: "TerraCAD Classic", icon: ASSET_BASE + "/img/coins/TerraCADClassic.svg", decimals: 6 },
+    { token: "uchf", symbol: "CHTC", name: "TerraCHF Classic", icon: ASSET_BASE + "/img/coins/TerraCHFClassic.svg", decimals: 6 },
+    { token: "ucny", symbol: "CNTC", name: "TerraCNY Classic", icon: ASSET_BASE + "/img/coins/TerraCNYClassic.svg", decimals: 6 },
+    { token: "udkk", symbol: "DKTC", name: "TerraDKK Classic", icon: ASSET_BASE + "/img/coins/TerraDKKClassic.svg", decimals: 6 },
+    { token: "ueur", symbol: "EUTC", name: "TerraEUR Classic", icon: ASSET_BASE + "/img/coins/TerraEURClassic.svg", decimals: 6 },
+    { token: "ugbp", symbol: "GPTC", name: "TerraGBP Classic", icon: ASSET_BASE + "/img/coins/TerraGBPClassic.svg", decimals: 6 },
+    { token: "uhkd", symbol: "HKTC", name: "TerraHKD Classic", icon: ASSET_BASE + "/img/coins/TerraHKDClassic.svg", decimals: 6 },
+    { token: "uidr", symbol: "IDTC", name: "TerraIDR Classic", icon: ASSET_BASE + "/img/coins/TerraIDRClassic.svg", decimals: 6 },
+    { token: "uinr", symbol: "INTC", name: "TerraINR Classic", icon: ASSET_BASE + "/img/coins/TerraINRClassic.svg", decimals: 6 },
+    { token: "ujpy", symbol: "JPTC", name: "TerraJPY Classic", icon: ASSET_BASE + "/img/coins/TerraJPYClassic.svg", decimals: 6 },
+    { token: "ukrw", symbol: "KRTC", name: "TerraKRW Classic", icon: ASSET_BASE + "/img/coins/TerraKRWClassic.svg", decimals: 6 },
+    { token: "umnt", symbol: "UMNTC", name: "TerraMNT Classic", icon: ASSET_BASE + "/img/coins/TerraMNTClassic.svg", decimals: 6 },
+    { token: "umyr", symbol: "MYTC", name: "TerraMYR Classic", icon: ASSET_BASE + "/img/coins/TerraMYRClassic.svg", decimals: 6 },
+    { token: "unok", symbol: "NOTC", name: "TerraNOK Classic", icon: ASSET_BASE + "/img/coins/TerraNOKClassic.svg", decimals: 6 },
+    { token: "uphp", symbol: "PHTC", name: "TerraPHP Classic", icon: ASSET_BASE + "/img/coins/TerraPHPClassic.svg", decimals: 6 },
+    { token: "usdr", symbol: "SDRC", name: "TerraSDR Classic", icon: ASSET_BASE + "/img/coins/TerraSDRClassic.svg", decimals: 6 },
+    { token: "usek", symbol: "SETC", name: "TerraSEK Classic", icon: ASSET_BASE + "/img/coins/TerraSEKClassic.svg", decimals: 6 },
+    { token: "usgd", symbol: "SGTC", name: "TerraSGD Classic", icon: ASSET_BASE + "/img/coins/TerraSGDClassic.svg", decimals: 6 },
+    { token: "uthb", symbol: "THTC", name: "TerraTHB Classic", icon: ASSET_BASE + "/img/coins/TerraTHBClassic.svg", decimals: 6 },
+    { token: "utwd", symbol: "TWTC", name: "TerraTWD Classic", icon: ASSET_BASE + "/img/coins/TerraTWDClassic.svg", decimals: 6 }
   ]
-};
+}
